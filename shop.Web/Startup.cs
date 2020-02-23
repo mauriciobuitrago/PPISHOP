@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using shop.Web.Data;
+using shop.Web.Data.Entities;
 
 namespace shop.Web
 {
@@ -25,9 +27,22 @@ namespace shop.Web
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
+        {// aqui le estoy diciendo que voy a utilizar mi clase user.. y tambien la clas de .net core
+            // le vamos a decir como queremos nuestra contraseña
+            // las restricciones que le vamos a dar a nuestra contraseña
+            services.AddIdentity<User, IdentityRole>(cfg =>
+            {
+                cfg.User.RequireUniqueEmail = true;
+                cfg.Password.RequireDigit = false;
+                cfg.Password.RequiredUniqueChars = 0;
+                cfg.Password.RequireLowercase = false;
+                cfg.Password.RequireNonAlphanumeric = false;
+                cfg.Password.RequireUppercase = false;
+                cfg.Password.RequiredLength = 6;
+            })
+           .AddEntityFrameworkStores<DataContext>();
 
-         
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -66,6 +81,9 @@ namespace shop.Web
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            // cuando yo corra mi projecto.. el seeder me crea ese usuario  y ese userAutenthication 
+            //me permite utilizar User
+            app.UseAuthentication();
             app.UseCookiePolicy();
 
             app.UseMvc(routes =>

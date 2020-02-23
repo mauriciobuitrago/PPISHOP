@@ -33,6 +33,11 @@ namespace shop.Web.Data.Entities
 
 		[DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = false)]
 		public double Stock { get; set; }
+
+		//aqui le estoy relacionando la tabla user con producto
+		//ejemplo un usuario matricula muchos productos
+		//gracias a .net core.. puedo hacer la relacion solo de un lado..
+		public User User { get; set; }
 	}
 
 
