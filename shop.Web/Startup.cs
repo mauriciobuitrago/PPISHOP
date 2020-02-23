@@ -41,6 +41,8 @@ namespace shop.Web
             {
                 cfg.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
+            //aqui le estoy inyectando datos a la base de datos si no tengo ningun registro
+            services.AddTransient<SeedDb>();
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
