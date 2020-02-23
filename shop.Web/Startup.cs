@@ -44,6 +44,9 @@ namespace shop.Web
             //aqui le estoy inyectando datos a la base de datos si no tengo ningun registro
             services.AddTransient<SeedDb>();
 
+            // Addscoped se usa y se mantiene la inyeccion de los datos
+            services.AddScoped<IRepository, Repository>();
+
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
