@@ -7,7 +7,7 @@ namespace shop.Web.Data.Entities
     using System.Linq;
     using System.Threading.Tasks;
 
-    public class Product
+    public class Product : IEntity
     {
 		public int Id { get; set; }
 

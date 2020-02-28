@@ -58,7 +58,7 @@ namespace shop.Web
             services.AddTransient<SeedDb>();
 
             // Addscoped se usa y se mantiene la inyeccion de los datos
-            services.AddScoped<IRepository, Repository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
 
             //cada que instancie la clase tiene que inyectar.. y con que implementacion tiene que inyectarle
             services.AddScoped<IUserHelper, UserHelper>();
