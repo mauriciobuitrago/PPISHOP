@@ -20,7 +20,7 @@ body {
 
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {
-    width: 100%;
+    width: 50%;
 }
 
 /* QR code generator */
@@ -35,3 +35,15 @@ body {
         display: none;
     }
 }
+
+.h1{
+    color:red;
+}
+.navbar-inverse {
+    background-color: lightpink;
+    border-color: lightpink;
+}
+.navbar-inverse .navbar-nav > li > a
+ {
+        color: dodgerblue;
+ }

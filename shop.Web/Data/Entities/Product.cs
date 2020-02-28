@@ -11,24 +11,27 @@ namespace shop.Web.Data.Entities
     {
 		public int Id { get; set; }
 
-		[MaxLength(50, ErrorMessage = "The field {0} only can contain a maximum {1} characters")]
+		[MaxLength(50, ErrorMessage = "El campo {0} debe ser maximo {1} caracteres")]
 		[Required]
 
+		[Display(Name = "Nombre")]
 		public string Name { get; set; }
 
 		[DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = false)]
+
+		[Display(Name = "Precio")]
 		public decimal Price { get; set; }
 
-		[Display(Name = "Image")]
+		[Display(Name = "Imagen")]
 		public string ImageUrl { get; set; }
 
-		[Display(Name = "Last Purchase")]
+		[Display(Name = "Ultima compra")]
 		public DateTime? LastPurchase { get; set; }
 
-		[Display(Name = "Last Sale")]
+		[Display(Name = "Ultima venta")]
 		public DateTime? LastSale { get; set; }
 
-		[Display(Name = "Is Availabe?")]
+		[Display(Name = "Esta disponible?")]
 		public bool IsAvailabe { get; set; }
 
 		[DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = false)]
@@ -39,7 +42,5 @@ namespace shop.Web.Data.Entities
 		//gracias a .net core.. puedo hacer la relacion solo de un lado..
 		public User User { get; set; }
 	}
-
-
 }
 

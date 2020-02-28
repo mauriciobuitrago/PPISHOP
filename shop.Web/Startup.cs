@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using shop.Web.Data;
 using shop.Web.Data.Entities;
+using shop.Web.Helpers;
 
 namespace shop.Web
 {
@@ -40,6 +36,7 @@ namespace shop.Web
                 cfg.Password.RequireUppercase = false;
                 cfg.Password.RequiredLength = 6;
             })
+
            .AddEntityFrameworkStores<DataContext>();
 
 
@@ -56,11 +53,15 @@ namespace shop.Web
             {
                 cfg.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
+
             //aqui le estoy inyectando datos a la base de datos si no tengo ningun registro
             services.AddTransient<SeedDb>();
 
             // Addscoped se usa y se mantiene la inyeccion de los datos
             services.AddScoped<IRepository, Repository>();
+
+            //cada que instancie la clase tiene que inyectar.. y con que implementacion tiene que inyectarle
+            services.AddScoped<IUserHelper, UserHelper>();
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -84,6 +85,7 @@ namespace shop.Web
             // cuando yo corra mi projecto.. el seeder me crea ese usuario  y ese userAutenthication 
             //me permite utilizar User
             app.UseAuthentication();
+
             app.UseCookiePolicy();
 
             app.UseMvc(routes =>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using shop.Web.Data.Entities;
+using shop.Web.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +12,13 @@ namespace shop.Web.Data
     {
 
         private readonly DataContext context;
-        private readonly UserManager<User> userManager;
+        private readonly IUserHelper userHelper;
         private Random random;
 
-        public SeedDb(DataContext context, UserManager<User> userManager)
+        public SeedDb(DataContext context,IUserHelper userHelper)
         {
             this.context = context;
-            this.userManager = userManager;
+            this.userHelper = userHelper;
             this.random = new Random();
         }
 
@@ -28,7 +29,8 @@ namespace shop.Web.Data
             await this.context.Database.EnsureCreatedAsync();
 
             // vamos a crear el usuario con el que se va a iniciar siempre 
-            var user = await this.userManager.FindByEmailAsync("DeisyOssa@gmail.com");
+            // var user = await this.userManager.FindByEmailAsync("DeisyOssa@gmail.com");
+            var user = await this.userHelper.GetUserByEmailAsync("DeisyOssa@gmail.com");
             if (user == null)
             {
                 user = new User
@@ -40,7 +42,8 @@ namespace shop.Web.Data
                 };
 
                 // aqui me va a crear el usuario.. y ademas le asigno la contraseña
-                var result = await this.userManager.CreateAsync(user, "123456");
+                //var result = await this.userManager.CreateAsync(user, "123456");
+                var result = await this.userHelper.AddUserAsync(user, "123456");
 
                 // si el resultado da.. no entra en este bucle
                 if (result != IdentityResult.Success)

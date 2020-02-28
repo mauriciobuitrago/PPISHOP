@@ -143,7 +143,7 @@ namespace shop.Web.Controllers
             this.repository.RemoveProduct(product);
             await this.repository.SaveAllAsync();
             return RedirectToAction(nameof(Index));
-        } 
+        }
 
 
     }
