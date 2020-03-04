@@ -41,6 +41,20 @@ namespace shop.Web.Data.Entities
 		//ejemplo un usuario matricula muchos productos
 		//gracias a .net core.. puedo hacer la relacion solo de un lado..
 		public User User { get; set; }
+
+		public string ImageFullPath 
+		{ get
+			{
+				if (string.IsNullOrEmpty(this.ImageUrl))
+   				{
+					return null;
+				}
+
+				//TODO  REVISAR LA DIRECCION CON LA QUE ESTA SALIENDO LAS APIS
+				return $"https://localhost:44332/{this.ImageUrl.Substring(1)}";
+				// recordar que $ es para interpolar o es decir concatenar
+			} 
+		}
 	}
 }
 
