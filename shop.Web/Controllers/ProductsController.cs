@@ -63,10 +63,13 @@ namespace shop.Web.Controllers
 
                 if (view.ImageFile != null && view.ImageFile.Length > 0)
                 {
+                    var guid = Guid.NewGuid().ToString();
+                    var file = $"{guid}.jpg";
+
                     path = Path.Combine(
                         Directory.GetCurrentDirectory(), 
                         "wwwroot\\images\\Products", 
-                        view.ImageFile.FileName); //aqui le estoy concatenando el nombre a la ruta para saber donde esta la imagen
+                        file); //aqui le estoy concatenando el nombre a la ruta para saber donde esta la imagen
 
                     using (var stream = new FileStream(path, FileMode.Create))
                     {
@@ -75,7 +78,7 @@ namespace shop.Web.Controllers
                      // aqui le estoy diciendo que tome la ruta relativa segun el ambiente 
                      //donde lo estoy ejecutando
 
-                    path = $"~/images/Products/{view.ImageFile.FileName}";
+                    path = $"~/images/Products/{file}";
                 }
 
                 // estoy conviritnedo el producto a una view para poder mandarlo con la ruta
@@ -157,10 +160,13 @@ namespace shop.Web.Controllers
                     // imagefile es la nueva foto.. si el usuario selecciono una nueva foto
                     if (view.ImageFile != null && view.ImageFile.Length > 0)
                     {
+                        var guid = Guid.NewGuid().ToString();
+                        var file = $"{guid}.jpg";
+
                         path = Path.Combine(
                             Directory.GetCurrentDirectory(),
                             "wwwroot\\images\\Products",
-                            view.ImageFile.FileName); //aqui le estoy concatenando el nombre a la ruta para saber donde esta la imagen
+                            file); //aqui le estoy concatenando el nombre a la ruta para saber donde esta la imagen
 
                         using (var stream = new FileStream(path, FileMode.Create))
                         {
@@ -169,7 +175,7 @@ namespace shop.Web.Controllers
                         // aqui le estoy diciendo que tome la ruta relativa segun el ambiente 
                         //donde lo estoy ejecutando
 
-                        path = $"~/images/Products/{view.ImageFile.FileName}";
+                        path = $"~/images/Products/{file}";
                     }
 
                     // estoy conviritnedo el producto a una view para poder mandarlo con la ruta

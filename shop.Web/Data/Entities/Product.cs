@@ -51,7 +51,8 @@ namespace shop.Web.Data.Entities
 				}
 
 				//TODO  REVISAR LA DIRECCION CON LA QUE ESTA SALIENDO LAS APIS
-				return $"https://localhost:44332/{this.ImageUrl.Substring(1)}";
+				//return $"https://localhost:44332/{this.ImageUrl.Substring(1)}";
+				return $"https://postrejuanita.azurewebsites.net/";
 				// recordar que $ es para interpolar o es decir concatenar
 			} 
 		}
