@@ -1,11 +1,12 @@
 ﻿
 using GalaSoft.MvvmLight.Command;
+using shop.UIFoms.Views;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace shop.UIFoms.ViewModels
 {
-    public class LoginViewModel
+    public class LoginViewModel 
     {
         public string Email { get; set; }
 
@@ -41,21 +42,20 @@ namespace shop.UIFoms.ViewModels
             if (!this.Email.Equals("deisy@gmail.com") || !this.Password.Equals("123456"))
             {
                 await Application.Current.MainPage.DisplayAlert(
-                    "OK",
-                    "FUCK YEAHHH",
+                    "Error",
+                    "User or password wrong",
                     "Accept");
                 return;
 
             }
 
+            // cada que yo vaya a tirar una pagina a memoria.. primero hay que instanciar la productviewmodel
+            // ademas de ligarla
+            // aqui le estoy diciendo que me pinte los productos que estan siendo cargados en memoria
+            MainViewModel.GetInstance().Products = new ProductsViewModel();
+            await Application.Current.MainPage.Navigation.PushAsync(new ProductsPage());
        
-                await Application.Current.MainPage.DisplayAlert(
-                    "OK",
-                    "FUCK YEAHHH",
-                    "Accept");
-                return;
-
-            
+                       
         }
     }
 
