@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using shop.Web.Data.Entities;
+using shop.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,10 @@ namespace shop.Web.Helpers
 
 		//aqui me devuelve si pudo hacer el logueo o si no pudo me muestra porque no pudo
 		Task<IdentityResult> AddUserAsync(User user, string password);
+		Task<SignInResult> LoginAsync(LoginViewModel model);
+
+		Task LogoutAsync();
+
 	}
 
 }

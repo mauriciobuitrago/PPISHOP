@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using shop.Web.Data;
 using shop.Web.Data.Entities;
@@ -10,7 +11,8 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace shop.Web.Controllers
-{
+{// aqui le digo que necesita autorizacion
+    [Authorize]
     public class ProductsController : Controller
     {
         private readonly IProductRepository productRepository;
