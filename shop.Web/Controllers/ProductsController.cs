@@ -86,8 +86,8 @@ namespace shop.Web.Controllers
                 // estoy conviritnedo el producto a una view para poder mandarlo con la ruta
                 var product = this.ToProduct(view, path);
 
-                // TODO: Pending to change to: this.User.Identity.Name
-                product.User = await this.userHelper.GetUserByEmailAsync("DeisyOssa@gmail.com");
+                // TODO: Pending to change to: this.User.Identity.Name CAMBIO HECHO!
+                product.User = await this.userHelper.GetUserByEmailAsync("this.User.Identity.Name");
                 await this.productRepository.CreateAsync(product);
                 return RedirectToAction(nameof(Index));
             }
@@ -184,8 +184,8 @@ namespace shop.Web.Controllers
                     var product = this.ToProduct(view, path);
 
 
-                                                                             // TODO: Pending to change to: this.User.Identity.Name
-                    product.User = await this.userHelper.GetUserByEmailAsync("DeisyOssa@gmail.com");
+                   // TODO: Pending to change to: this.User.Identity.Name
+                    product.User = await this.userHelper.GetUserByEmailAsync("this.User.Identity.Name");
                     await this.productRepository.UpdateAsync(product);
                 }
                 catch (DbUpdateConcurrencyException)
