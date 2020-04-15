@@ -3,10 +3,13 @@
 namespace shop.Web.Controllers.API
 {
 	using Data;
-	using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
 
 	// aqui es donde le vamos a decir a donde debe acceder a los datos 
 	[Route("api/[Controller]")]
+	[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 	public class ProductsController : Controller
 	{
 		private readonly IProductRepository productRepository;

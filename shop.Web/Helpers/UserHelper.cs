@@ -51,6 +51,16 @@ namespace shop.Web.Helpers
 		{
 			return await this.userManager.UpdateAsync(user);
 		}
+
+		//con este metodo puedo ponerle que me bloquee la cuenta si se equivoca 3 veces
+		public async Task<SignInResult> ValidatePasswordAsync(User user, string password)
+		{
+			return await this.signInManager.CheckPasswordSignInAsync(
+				user,
+				password,
+				false);
+		}
+
 	}
 
 
