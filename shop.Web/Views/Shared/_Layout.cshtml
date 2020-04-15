@@ -17,24 +17,33 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="rd-navbar-nav-wrap toggle-original-elements">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">shop.Web</a>
-            </div>
-            <div class="navbar-collapse collapse">
+                   <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li> <img src="~/images/logo1.jpg" alt="ASP.NET" class="img-responsive glyphicon-align-center" /></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index"><strong>Pagina Principal</strong></a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About"><strong>Acerca</strong></a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact"><strong>Contactenos</strong></a></li>
-                    <li><a asp-area="" asp-controller="Products" asp-action="Index"><strong>Productos</strong></a></li>
+                    <li class="rd-nav-item active"> 
+                    <img src="~/images/dise.jpg" alt="ASP.NET" class="img-responsive glyphicon-align-center" />
+                    </li>
+                    <li class="rd-nav-item active">
+                        <a asp-area="" asp-controller="Home" asp-action="Index" class="rd-nav-link">
+                            Pagina Principal
+                        </a>
+                    </li>
+                    <li class="rd-nav-item active">
+                        <a asp-area="" asp-controller="Home" asp-action="About" class="rd-nav-link">
+                            Acerca
+                        </a>
+                    </li>
+                    <li class="rd-nav-item active">
+                        <a asp-area="" asp-controller="Home" asp-action="Contact" class="rd-nav-link">
+                            Contactenos
+                        </a>
+                    </li>
+                    <li class="rd-nav-item active">
+                        <a asp-area="" asp-controller="Products" asp-action="Index" class="rd-nav-link">
+                            Productos
+                        </a>
+                    </li>
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -48,7 +57,7 @@
                         <li><a asp-area="" asp-controller="Account" asp-action="Login">Login</a></li>
                     }
                 </ul>
-
+<br /><br />
             </div>
         </div>
     </nav>
@@ -59,7 +68,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2020 - shop.Web</p>
+            <p>&copy; https://postrejuanita.azurewebsites.net</p>
         </footer>
     </div>
 

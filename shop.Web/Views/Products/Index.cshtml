@@ -4,11 +4,13 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Productos</h2>
-
+<h1 class="text-success">Productos</h1>
+<br />
 <p>
     <a asp-action="Create" class="btn btn-primary">Crear</a>
 </p>
+<br />
+<br />
 <table class="table">
     <thead>
         <tr>
@@ -35,7 +37,7 @@
             </th>
             <th></th>
         </tr>
-    </thead>
+            </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
