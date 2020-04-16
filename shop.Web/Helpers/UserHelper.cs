@@ -10,11 +10,13 @@ namespace shop.Web.Helpers
 	{// con esta clase es que voy a configurar el userManager...
 		private readonly UserManager<User> userManager;
 		private readonly SignInManager<User> signInManager;
+		private readonly RoleManager<IdentityRole> roleManager;
 
-		public UserHelper(UserManager<User> userManager, SignInManager<User> signInManager)
+		public UserHelper(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager)
 		{
 			this.userManager = userManager;
 			this.signInManager = signInManager;
+			this.roleManager = roleManager;
 		}
 
 		public async Task<IdentityResult> AddUserAsync(User user, string password)
@@ -22,15 +24,38 @@ namespace shop.Web.Helpers
 			return await this.userManager.CreateAsync(user, password);
 		}
 
+		public async Task AddUserToRoleAsync(User user, string roleName)
+		{
+			await this.userManager.AddToRoleAsync(user, roleName);
+		}
+
 		public async Task<IdentityResult> ChangePasswordAsync(User user, string oldPassword, string newPassword)
 		{
 			return await this.userManager.ChangePasswordAsync(user, oldPassword, newPassword);
 		}
 
+		public async Task CheckRoleAsync(string roleName)
+		{
+			var roleExists = await this.roleManager.RoleExistsAsync(roleName);
+			if (!roleExists)
+			{
+				await this.roleManager.CreateAsync(new IdentityRole
+				{
+					Name = roleName
+				});
+			}
+		}
+
+
 		public async Task<User> GetUserByEmailAsync(string email)
 		{
 			return await this.userManager.FindByEmailAsync(email);
 
+		}
+
+		public async Task<bool> IsUserInRoleAsync(User user, string roleName)
+		{
+			return await this.userManager.IsInRoleAsync(user, roleName);
 		}
 
 		public async Task<SignInResult> LoginAsync(LoginViewModel model)
@@ -47,7 +72,7 @@ namespace shop.Web.Helpers
 			await this.signInManager.SignOutAsync();
 		}
 
-		public  async Task<IdentityResult> UpdateUserAsync(User user)
+		public async Task<IdentityResult> UpdateUserAsync(User user)
 		{
 			return await this.userManager.UpdateAsync(user);
 		}

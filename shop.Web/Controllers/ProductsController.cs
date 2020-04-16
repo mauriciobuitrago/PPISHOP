@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace shop.Web.Controllers
 {// aqui le digo que necesita autorizacion
-    [Authorize]
+    
     public class ProductsController : Controller
     {
         private readonly IProductRepository productRepository;
@@ -26,6 +26,7 @@ namespace shop.Web.Controllers
         }
 
         // GET: Products
+        
         public IActionResult Index()
         {
             return View(this.productRepository.GetAll().OrderBy(p=> p.Name));
@@ -49,6 +50,8 @@ namespace shop.Web.Controllers
         }
 
         // GET: Products/Create
+        [Authorize(Roles = "Admin")]
+
         public IActionResult Create()
         {
             return View();
@@ -113,6 +116,7 @@ namespace shop.Web.Controllers
         }
 
         // GET: Products/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -206,6 +210,7 @@ namespace shop.Web.Controllers
         }
 
         // GET: Products/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

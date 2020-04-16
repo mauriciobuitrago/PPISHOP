@@ -28,6 +28,10 @@ namespace shop.Web.Data
             //recordar , esto es Code First
             await this.context.Database.EnsureCreatedAsync();
 
+            await this.userHelper.CheckRoleAsync("Admin");
+            await this.userHelper.CheckRoleAsync("Customer");
+
+
             // vamos a crear el usuario con el que se va a iniciar siempre 
             // var user = await this.userManager.FindByEmailAsync("DeisyOssa@gmail.com");
             var user = await this.userHelper.GetUserByEmailAsync("DeisyOssa@gmail.com");
@@ -39,6 +43,7 @@ namespace shop.Web.Data
                     LastName = "Ossa",
                     Email = "DeisyOssa@gmail.com",
                     UserName = "DeisyOssa@gmail.com"
+
                 };
 
                 // aqui me va a crear el usuario.. y ademas le asigno la contraseña
@@ -50,6 +55,14 @@ namespace shop.Web.Data
                 {
                     throw new InvalidOperationException("Could not create the user in seeder");
                 }
+
+                await this.userHelper.AddUserToRoleAsync(user, "Admin");
+            }
+
+            var isInRole = await this.userHelper.IsUserInRoleAsync(user, "Admin");
+            if (!isInRole)
+            {
+                await this.userHelper.AddUserToRoleAsync(user, "Admin");
             }
 
             // aqui estoy preguntando si no hay datos en la base de datos, me meta productos en la base de datos
