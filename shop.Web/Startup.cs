@@ -62,6 +62,12 @@ namespace shop.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Account/NotAuthorized";
+                options.AccessDeniedPath = "/Account/NotAuthorized";
+            });
+
             // aqui estoy haciendo la conexion a mi base de datos que tengo por defecto
             // el string de conexion es default conexion.. asi es como se llama en el JSON
             services.AddDbContext<DataContext>(cfg =>
@@ -94,7 +100,8 @@ namespace shop.Web
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-
+            
+            app.UseStatusCodePagesWithReExecute("/error/{0}");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             // cuando yo corra mi projecto.. el seeder me crea ese usuario  y ese userAutenthication 
