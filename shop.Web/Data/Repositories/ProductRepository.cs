@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 namespace shop.Web.Data
 {
 	using Entities;
+    using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.EntityFrameworkCore;
 
     // cuando implementamos el product repository 
@@ -25,6 +26,26 @@ namespace shop.Web.Data
 		{
 			return this.context.Products.Include(p=>p.User);
 		}
+
+		//aqui me devuelve una lista
+		public IEnumerable<SelectListItem> GetComboProducts()
+		{ //seleccione un nuevo objeto por cada producto name
+			//value es lo que almacena el combobox
+			var list = this.context.Products.Select(p => new SelectListItem
+			{
+				Text = p.Name,
+				Value = p.Id.ToString()
+			}).ToList();
+
+			list.Insert(0, new SelectListItem
+			{
+				Text = "(Selecciona un product...)",
+				Value = "0"
+			});
+
+			return list;
+		}
+
 	}
 
 }

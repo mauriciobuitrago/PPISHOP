@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using shop.Web.Data;
 using shop.Web.Data.Entities;
+using shop.Web.Data.Repositories;
 using shop.Web.Helpers;
 using System.Text;
 
@@ -80,6 +81,7 @@ namespace shop.Web
 
             // Addscoped se usa y se mantiene la inyeccion de los datos
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
 
             //cada que instancie la clase tiene que inyectar.. y con que implementacion tiene que inyectarle
             services.AddScoped<IUserHelper, UserHelper>();
