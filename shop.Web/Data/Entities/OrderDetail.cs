@@ -13,13 +13,17 @@ namespace shop.Web.Data.Entities
         [Required]
         public Product Product { get; set; }
 
+
+        [Display(Name ="Precio")]
         [DisplayFormat(DataFormatString = "{0:C2}")]
         public decimal Price { get; set; }
 
+        [Display(Name = "Cantidad")]
         [DisplayFormat(DataFormatString = "{0:N2}")]
         public double Quantity { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:C2}")]
+        [Display(Name = "Valor")]
         public decimal Value { get { return this.Price * (decimal)this.Quantity; } }
     }
 

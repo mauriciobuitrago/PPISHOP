@@ -8,12 +8,13 @@ namespace shop.Web.Models
 {
     public class ChangeUserViewModel
     {
+
         [Required]
-        [Display(Name = "First Name")]
+        [Display(Name = "Primer Nombre")]
         public string FirstName { get; set; }
 
         [Required]
-        [Display(Name = "Last Name")]
+        [Display(Name = "Apellido")]
         public string LastName { get; set; }
     }
 

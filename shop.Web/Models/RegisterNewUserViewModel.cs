@@ -9,17 +9,18 @@ namespace shop.Web.Models
     public class RegisterNewUserViewModel
     {
         [Required]
-        [Display(Name = "First Name")]
+        [Display(Name = "Nombre")]
         public string FirstName { get; set; }
 
         [Required]
-        [Display(Name = "Last Name")]
+        [Display(Name = "Apellido")]
         public string LastName { get; set; }
 
         [Required]
         [DataType(DataType.EmailAddress)]
         public string Username { get; set; }
 
+ 
         [Required]
         [MinLength(6)]
         public string Password { get; set; }

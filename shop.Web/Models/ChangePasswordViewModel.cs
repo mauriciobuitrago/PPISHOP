@@ -9,15 +9,15 @@ namespace shop.Web.Models
     public class ChangePasswordViewModel
     {
         [Required]
-        [Display(Name = "Current password")]
+        [Display(Name = "Contraseña actual")]
         public string OldPassword { get; set; }
 
         [Required]
-        [Display(Name = "New password")]
+        [Display(Name = "Nueva contraseña")]
         public string NewPassword { get; set; }
 
         [Required]
-        [Compare("NewPassword")]
+        [Compare("Confirmar nueva contraseña")]
         public string Confirm { get; set; }
     }
 
