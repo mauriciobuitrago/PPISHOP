@@ -9,10 +9,12 @@ namespace shop.Web.Models
 {
     public class AddItemViewModel
     {
-        [Display(Name = "Product")]
+        [Display(Name = "Producto")]
         [Range(1, int.MaxValue, ErrorMessage = "Debes seleccionar un producto!.")]
-        public int ProductId { get; set; }
+       public int ProductId { get; set; }
 
+
+        [Display(Name = "Cantidad")]
         [Range(0.0001, double.MaxValue, ErrorMessage = "La cantidad debe ser un numero positivo")]
         public double Quantity { get; set; }
 

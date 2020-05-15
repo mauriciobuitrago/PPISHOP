@@ -11,6 +11,7 @@ namespace shop.Web.Data.Entities
         public int Id { get; set; }
 
         [Required]
+        [Display(Name = "Producto")]
         public Product Product { get; set; }
 
 

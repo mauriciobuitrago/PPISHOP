@@ -10,8 +10,10 @@ namespace shop.Web.Data.Entities
     public class User : IdentityUser
 
     {
+        [Display(Name = "Nombre")]
         public string FirstName { get; set; }
 
+        [Display(Name = "Apellido")]
         public string LastName { get; set; }
 
         [Display(Name ="Nombre Completo")]

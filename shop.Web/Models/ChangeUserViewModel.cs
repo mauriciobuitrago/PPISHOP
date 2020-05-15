@@ -10,7 +10,7 @@ namespace shop.Web.Models
     {
 
         [Required]
-        [Display(Name = "Primer Nombre")]
+        [Display(Name = "Nombre")]
         public string FirstName { get; set; }
 
         [Required]

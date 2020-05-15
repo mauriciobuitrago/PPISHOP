@@ -4,7 +4,9 @@
     ViewData["Title"] = "Create";
 }
 
-<h1 class="text-success">Crear Producto</h1>
+    <center>
+        <h1 class="text-success">Crear Producto</h1>
+    </center>
 <br />
 <div class="row">
     <div class="col-md-6">
@@ -64,9 +66,9 @@
         <br /><br />
         <img src="~/images/crear.jpg" alt="ASP.NET" class="img-responsive glyphicon-align-center" />
     </div>
-    </div>
+</div>
 
 
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

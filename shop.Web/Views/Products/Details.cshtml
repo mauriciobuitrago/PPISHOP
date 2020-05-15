@@ -4,61 +4,76 @@
     ViewData["Title"] = "Details";
 }
 
-<h1 class="text-success">Detalle Producto</h1>
+<center>
+    <h1 class="text-success">Detalle Producto</h1>
+</center>
 <br />
-    <div class="row">
-        <div class="col-md-6">
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.Name)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.Name)
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.Price)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.Price)
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.ImageUrl)
-                </dt>
-                <dd>
-                    @if (!string.IsNullOrEmpty(Model.ImageUrl))
-                    {
-                        <img src="@Url.Content(Model.ImageUrl)" alt="Image" style="width:100px;height:150px;max-width: 100%; height: auto;" />
-                    }
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.LastPurchase)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.LastPurchase)
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.LastSale)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.LastSale)
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.IsAvailabe)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.IsAvailabe)
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.Stock)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.Stock)
-                </dd>
-            </dl>
+<br />
+<br />
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <strong>
+            <div class="col-md-4 resultado">
 
-            <div>
-                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warninging">Editar</a> |
-                <a asp-action="Index" class="btn btn-warninging">Devolver a la lista de productos</a>
+                @Html.DisplayNameFor(model => model.Name)
+                <br />
+              
+
+                @Html.DisplayNameFor(model => model.Price)
+                <br />
+
+
+                @Html.DisplayNameFor(model => model.LastPurchase)
+                <br />
+
+
+                @Html.DisplayNameFor(model => model.LastSale)
+                <br />
+
+
+                @Html.DisplayNameFor(model => model.IsAvailabe)
+                <br />
+
+
+                @Html.DisplayNameFor(model => model.Stock)
             </div>
+        </strong>
+        <div class="col-md-6 resultado">
+
+            @Html.DisplayFor(model => model.Name)
+            <br />
+         
+
+            @Html.DisplayFor(model => model.Price)
+            <br />
+
+            @Html.DisplayFor(model => model.LastPurchase)
+            <br />
+
+            @Html.DisplayFor(model => model.LastSale)
+            <br />
+            @Html.DisplayFor(model => model.IsAvailabe)
+            <br />
+            @Html.DisplayFor(model => model.Stock)
+
+        </div>
+        <div class="col-md-2">
+            @if (!string.IsNullOrEmpty(Model.ImageUrl))
+            {
+                <img src="@Url.Content(Model.ImageUrl)" alt="Image" style="width:300px; height: auto;" />
+            }
         </div>
     </div>
+
+
+</div>
+
+<br />
+<br />
+<center>
+    <div class="row">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warninging">Editar</a> |
+        <a asp-action="Index" class="btn btn-warninging">Devolver a la lista de productos</a>
+    </div>
+</center>

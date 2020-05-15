@@ -17,7 +17,7 @@ namespace shop.Web.Models
         public string NewPassword { get; set; }
 
         [Required]
-        [Compare("Confirmar nueva contraseña")]
+        [Compare("NewPassword")]
         public string Confirm { get; set; }
     }
 

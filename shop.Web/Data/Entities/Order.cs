@@ -11,11 +11,11 @@ namespace shop.Web.Data.Entities
 		public int Id { get; set; }
 
 		[Required]
-		[Display(Name = "Order date")]
+		[Display(Name = "Fecha Orden")]
 		[DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}", ApplyFormatInEditMode = false)]
 		public DateTime OrderDate { get; set; }
 
-		[Display(Name = "Delivery date")]
+		[Display(Name = "Fecha de Envio")]
 		[DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}", ApplyFormatInEditMode = false)]
 		public DateTime? DeliveryDate { get; set; }
 
@@ -40,7 +40,7 @@ namespace shop.Web.Data.Entities
 		public decimal Value { get { return this.Items == null ? 0 : this.Items.Sum(i => i.Value); } }
 
 		//este metodo es para organizar la hora.. para que salga con la hora local y no la de londres
-		[Display(Name = "Order date")]
+		[Display(Name = "Fecha Orden")]
 		[DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}", ApplyFormatInEditMode = false)]
 		public DateTime? OrderDateLocal
 		{
