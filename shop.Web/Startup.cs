@@ -31,6 +31,8 @@ namespace shop.Web
             // las restricciones que le vamos a dar a nuestra contraseña
             services.AddIdentity<User, IdentityRole>(cfg =>
             {
+                cfg.Tokens.AuthenticatorTokenProvider = TokenOptions.DefaultAuthenticatorProvider;
+                cfg.SignIn.RequireConfirmedEmail = true;
                 cfg.User.RequireUniqueEmail = true;
                 cfg.Password.RequireDigit = false;
                 cfg.Password.RequiredUniqueChars = 0;
@@ -40,6 +42,7 @@ namespace shop.Web
                 cfg.Password.RequiredLength = 6;
             })
 
+            .AddDefaultTokenProviders()
            .AddEntityFrameworkStores<DataContext>();
 
             services.AddAuthentication()
@@ -85,7 +88,7 @@ namespace shop.Web
 
             //cada que instancie la clase tiene que inyectar.. y con que implementacion tiene que inyectarle
             services.AddScoped<IUserHelper, UserHelper>();
-
+            services.AddScoped<IMailHelper, MailHelper>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

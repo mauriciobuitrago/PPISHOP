@@ -58,12 +58,19 @@
         </form>
     </div>
     <div class="col-md-2">
-        </div>
-        <div class="col-md-6">
-            <img src="~/images/registro.jpg" alt="ASP.NET" class="img-responsive glyphicon-align-center" />
-        </div>
     </div>
+    <div class="col-md-6">
+        <img src="~/images/registro.jpg" alt="ASP.NET" class="img-responsive glyphicon-align-center" />
+    </div>
+</div>
 
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+<div class="text-success">
+    <p>
+        @ViewBag.Message
+    </p>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

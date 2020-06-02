@@ -17,13 +17,20 @@ namespace shop.Web.Controllers
     public class AccountController : Controller
 
     {
+        private readonly IMailHelper mailHelper;
         private readonly IUserHelper userHelper;
         private readonly IConfiguration configuration;
 
-        public AccountController(IUserHelper userHelper, IConfiguration configuration)
+
+        public AccountController(
+            IMailHelper mailHelper,
+            IUserHelper userHelper,
+            IConfiguration configuration)
         {
+            this.mailHelper = mailHelper;
             this.userHelper = userHelper;
             this.configuration = configuration;
+
         }
 
         public IActionResult Login()
@@ -77,12 +84,15 @@ namespace shop.Web.Controllers
                 var user = await this.userHelper.GetUserByEmailAsync(model.Username);
                 if (user == null)
                 {
+
+
                     user = new User
                     {
                         FirstName = model.FirstName,
                         LastName = model.LastName,
                         Email = model.Username,
-                        UserName = model.Username
+                        UserName = model.Username,
+
                     };
 
                     var result = await this.userHelper.AddUserAsync(user, model.Password);
@@ -92,22 +102,17 @@ namespace shop.Web.Controllers
                         return this.View(model);
                     }
 
-
-                    var loginViewModel = new LoginViewModel
+                    var myToken = await this.userHelper.GenerateEmailConfirmationTokenAsync(user);
+                    var tokenLink = this.Url.Action("ConfirmEmail", "Account", new
                     {
-                        Password = model.Password,
-                        RememberMe = false,
-                        Username = model.Username
-                    };
+                        userid = user.Id,
+                        token = myToken
+                    }, protocol: HttpContext.Request.Scheme);
 
-                    var result2 = await this.userHelper.LoginAsync(loginViewModel);
-
-                    if (result2.Succeeded)
-                    {
-                        return this.RedirectToAction("Index", "Home");
-                    }
-
-                    this.ModelState.AddModelError(string.Empty, "The user couldn't be login.");
+                    this.mailHelper.SendMail(model.Username, "Email confirmation", $"<h1>Email Confirmation</h1>" +
+                        $"To allow the user, " +
+                        $"plase click in this link:</br></br><a href = \"{tokenLink}\">Confirm Email</a>");
+                    this.ViewBag.Message = "The instructions to allow your user has been sent to email.";
                     return this.View(model);
                 }
 
@@ -116,6 +121,7 @@ namespace shop.Web.Controllers
 
             return this.View(model);
         }
+
 
 
         public async Task<IActionResult> ChangeUser()
@@ -241,6 +247,27 @@ namespace shop.Web.Controllers
             return this.View();
         }
 
+        public async Task<IActionResult> ConfirmEmail(string userId, string token)
+        {
+            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(token))
+            {
+                return this.NotFound();
+            }
+
+            var user = await this.userHelper.GetUserByIdAsync(userId);
+            if (user == null)
+            {
+                return this.NotFound();
+            }
+
+            var result = await this.userHelper.ConfirmEmailAsync(user, token);
+            if (!result.Succeeded)
+            {
+                return this.NotFound();
+            }
+
+            return View();
+        }
 
 
     }
