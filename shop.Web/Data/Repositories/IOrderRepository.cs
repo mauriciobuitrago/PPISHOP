@@ -30,6 +30,13 @@ namespace shop.Web.Data.Repositories
 
         //para confirmar el pedido.. 
         Task<bool> ConfirmOrderAsync(string userName);
+
+        //borrar orden
+        Task DeleteOrderAsync(int id);
+
+        Task DeleteOrderDetails(int id);
+
+      
     }
 
 }

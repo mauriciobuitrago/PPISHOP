@@ -26,6 +26,9 @@ namespace shop.Web.Data.Entities
         [DisplayFormat(DataFormatString = "{0:C2}")]
         [Display(Name = "Valor")]
         public decimal Value { get { return this.Price * (decimal)this.Quantity; } }
+
+       
+
     }
 
 }

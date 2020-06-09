@@ -60,7 +60,7 @@ namespace shop.Web.Controllers
                     return this.RedirectToAction("Index", "Home");
                 }
             }
-            this.ModelState.AddModelError(string.Empty, "Failed to login.");
+            this.ModelState.AddModelError(string.Empty, "Ingreso fallido");
             return this.View(model);
         }
 
@@ -98,7 +98,7 @@ namespace shop.Web.Controllers
                     var result = await this.userHelper.AddUserAsync(user, model.Password);
                     if (result != IdentityResult.Success)
                     {
-                        this.ModelState.AddModelError(string.Empty, "The user couldn't be created.");
+                        this.ModelState.AddModelError(string.Empty, "El usuario no fue creado correctamente.");
                         return this.View(model);
                     }
 
@@ -109,14 +109,14 @@ namespace shop.Web.Controllers
                         token = myToken
                     }, protocol: HttpContext.Request.Scheme);
 
-                    this.mailHelper.SendMail(model.Username, "Email confirmation", $"<h1>Email Confirmation</h1>" +
-                        $"To allow the user, " +
-                        $"plase click in this link:</br></br><a href = \"{tokenLink}\">Confirm Email</a>");
-                    this.ViewBag.Message = "The instructions to allow your user has been sent to email.";
+                    this.mailHelper.SendMail(model.Username, "Confirmacion de Email", $"<h1>Registro Postres Juanita</h1>" +
+                        $"Confirmación de correo, " +
+                        $"Para confirmar dar Clic en el link:</br></br><a href = \"{tokenLink}\">Confirmar Correo</a>");
+                    this.ViewBag.Message = "Se requiere confirmación del correo.";
                     return this.View(model);
                 }
 
-                this.ModelState.AddModelError(string.Empty, "The username is already registered.");
+                this.ModelState.AddModelError(string.Empty, "El usuario se encuentra registrado.");
             }
 
             return this.View(model);
@@ -150,7 +150,7 @@ namespace shop.Web.Controllers
                     var respose = await this.userHelper.UpdateUserAsync(user);
                     if (respose.Succeeded)
                     {
-                        this.ViewBag.UserMessage = "User updated!";
+                        this.ViewBag.UserMessage = "Usuario Actualizado";
                     }
                     else
                     {
@@ -160,7 +160,7 @@ namespace shop.Web.Controllers
                 }
                 else
                 {
-                    this.ModelState.AddModelError(string.Empty, "User no found.");
+                    this.ModelState.AddModelError(string.Empty, "No se encontro el usuario");
                 }
             }
 
@@ -192,7 +192,7 @@ namespace shop.Web.Controllers
                 }
                 else
                 {
-                    this.ModelState.AddModelError(string.Empty, "User no found.");
+                    this.ModelState.AddModelError(string.Empty, "Usuario no encontrado.");
                 }
             }
 

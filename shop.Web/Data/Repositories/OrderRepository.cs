@@ -15,7 +15,7 @@ namespace shop.Web.Data.Repositories
         private readonly DataContext context;
         private readonly IUserHelper userHelper;
 
-        public OrderRepository(DataContext context,IUserHelper userHelper):base(context)
+        public OrderRepository(DataContext context, IUserHelper userHelper) : base(context)
         {
             this.context = context;
             this.userHelper = userHelper;
@@ -176,6 +176,57 @@ namespace shop.Web.Data.Repositories
             this.context.OrderDetailTemps.RemoveRange(orderTmps);
             await this.context.SaveChangesAsync();
             return true;
+        }
+
+        public async Task DeleteOrderAsync(int id)
+        {
+            var order = await this.context.Orders.FindAsync(id);
+
+            if (order == null)
+            {
+                return;
+            }
+
+            this.context.Orders.Remove(order);
+            await this.context.SaveChangesAsync();
+
+        }
+
+
+
+
+
+        //  public async Task<IQueryable<OrderDetailTemp>> GetDetailTempsAsync(string userName)
+        public async Task DeleteOrderDetails(int id)
+        {
+            var prueba = context.OrderDetails.FromSql("SELECT * FROM dbo.OrderDetails WHERE OrderId = {0}", id);
+            var IdPrueba = prueba.Select(o => o.Id);
+
+            bool cont = true;
+
+            while (cont != false)
+            {
+
+                int IdDetails = IdPrueba.First();
+                var orderDetails = await this.context.OrderDetails.FindAsync(IdDetails);
+
+                if (orderDetails == null)
+                {
+                    return;
+                }
+
+                this.context.OrderDetails.Remove(orderDetails);
+                await this.context.SaveChangesAsync();
+
+                if (!IdPrueba.Any() == true)
+
+                {
+                    cont = false;
+                    break;
+                }
+
+            }
+
         }
 
 

@@ -106,5 +106,40 @@ namespace shop.Web.Controllers
 
 
 
+        // GET: Products/Delete/5
+      
+        public async Task<IActionResult> DeleteOrder(int? id)
+        { 
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var order = await this.orderRepository.GetByIdAsync(id.Value);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return View(order);
+        }
+        // POST: Products/Delete/5
+        [HttpPost, ActionName("DeleteOrder")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteOrderConfirm(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            await this.orderRepository.DeleteOrderDetails(id.Value);
+            await this.orderRepository.DeleteOrderAsync(id.Value);
+            return this.RedirectToAction("Index");
+        }
+        
+
+       
+
     }
 }

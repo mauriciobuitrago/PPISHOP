@@ -9,8 +9,8 @@
 </center>
 
 <p>
-    <a asp-action="AddProduct" class="btn btn-success">Add Product</a>
-    <a asp-action="ConfirmOrder" class="btn btn-primary" id="btnConfirm">Confirm Order</a>
+    <a asp-action="AddProduct" class="btn btn-success">Agregar Producto</a>
+    <a asp-action="ConfirmOrder" class="btn btn-primary" id="btnConfirm">Confirmar Orden</a>
 </p>
 <table class="table">
     <thead>
@@ -61,14 +61,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><i class="fa fa-window-close"></i></button>
-                <h4 class="modal-title">Confirm</h4>
+                <p class="modal-title">Confirmación</p>
             </div>
             <div class="modal-body">
-                <p>Quieres confirmar la orden?</p>
+                <p>¿Quieres confirmar la orden?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="btnYesConfirm">SI</button>
-                <button type="button" class="btn btn-success" id="btnNoConfirm">NO</button>
+                <button type="button" class="btn btn-info" id="btnYesConfirm">SI</button>
+                <button type="button" class="btn btn-info" id="btnNoConfirm">NO</button>
 
             </div>
         </div>
