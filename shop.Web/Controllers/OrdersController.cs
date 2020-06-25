@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using shop.Web.Data;
+using shop.Web.Data.Entities;
 using shop.Web.Data.Repositories;
+using shop.Web.Helpers;
 using shop.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -15,11 +18,13 @@ namespace shop.Web.Controllers
     {
         private readonly IOrderRepository orderRepository;
         private readonly IProductRepository productRepository;
+        private readonly DataContext context;
 
-        public OrdersController(IOrderRepository orderRepository,IProductRepository productRepository)
+        public OrdersController(IOrderRepository orderRepository,IProductRepository productRepository,DataContext context)
         {
             this.orderRepository = orderRepository;
             this.productRepository = productRepository;
+            this.context = context;
         }
 
         //aqui es donde le voy a decir que me pinte la tabla de ordener
@@ -137,9 +142,31 @@ namespace shop.Web.Controllers
             await this.orderRepository.DeleteOrderAsync(id.Value);
             return this.RedirectToAction("Index");
         }
-        
 
-       
+        public async Task<IActionResult> Details(int? id)
+        {
+
+            var prueba = context.OrderDetails.FromSql("SELECT * FROM dbo.OrderDetails WHERE OrderId = {0}", id);
+
+            var aux = prueba.Select(o => o.Product.Id);
+
+        
+         
+                int? IdDetails = aux.First();
+                var product = await this.productRepository.GetByIdAsync(IdDetails.Value);
+                
+
+                if (id == null)
+                {
+                    return new NotFoundViewResult("ProductNotFound");
+                }
+                //TODO IMPLEMENTAR UNA LISTA              
+                                                                      
+            return View(product);
+        }
+
+
+
 
     }
 }

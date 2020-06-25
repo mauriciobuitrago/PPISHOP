@@ -18,11 +18,13 @@ namespace shop.Web.Controllers
         private readonly IProductRepository productRepository;
 
         private readonly IUserHelper userHelper;
+        private readonly DataContext context;
 
-        public ProductsController(IProductRepository productRepository, IUserHelper userHelper)
+        public ProductsController(IProductRepository productRepository, IUserHelper userHelper,DataContext context)
         {
             this.productRepository = productRepository;
             this.userHelper = userHelper;
+            this.context = context;
         }
 
         // GET: Products
@@ -232,6 +234,17 @@ namespace shop.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+
+            var prueba = context.OrderDetails.FromSql("SELECT * FROM dbo.OrderDetails WHERE ProductId = {0}", id);
+            var IdPrueba = prueba.Select(o => o.Id);
+           
+
+            if (IdPrueba.Any() == true)
+            {
+                return new NotFoundViewResult("ProductExisting");
+               
+            }
+                    
             var product = await this.productRepository.GetByIdAsync(id);
             await this.productRepository.DeleteAsync(product);
             return RedirectToAction(nameof(Index));
