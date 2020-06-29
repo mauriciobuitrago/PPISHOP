@@ -54,11 +54,18 @@
 
                            <li><a asp-area="" asp-controller="Orders" asp-action="Index">Ordenes</a></li>
 
-                           <li class="rd-nav-item active">
-                               <a asp-area="" asp-controller="Orders" asp-action="SudmitOrders" class="rd-nav-link">
-                                   Despacho ordenes
-                               </a>
-                           </li>
+
+                           @if (this.User.IsInRole("Admin"))
+                           {
+                               <th>
+                               <li><a asp-area="" asp-controller="Orders" asp-action="SubmitOrders">Despacho Ordenes</a></li>
+                               </th>
+                           }
+
+                       
+
+
+
                        </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if (this.User.Identity.IsAuthenticated)

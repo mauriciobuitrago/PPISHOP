@@ -28,15 +28,18 @@ namespace shop.Web.Data.Entities
 
 
 		[DisplayFormat(DataFormatString = "{0:N0}")]
+		[Display(Name = "Tipos de productos")]
 		public int Lines { get { return this.Items == null ? 0 : this.Items.Count(); } }
 
 
 		// suma de la cantidad de todos mis productos
 		[DisplayFormat(DataFormatString = "{0:N2}")]
+		[Display(Name = "Cantidad")]
 		public double Quantity { get { return this.Items == null ? 0 : this.Items.Sum(i => i.Quantity); } }
 
 		
 		[DisplayFormat(DataFormatString = "{0:C2}")]
+		[Display(Name = "Valor")]
 		public decimal Value { get { return this.Items == null ? 0 : this.Items.Sum(i => i.Value); } }
 
 		//este metodo es para organizar la hora.. para que salga con la hora local y no la de londres

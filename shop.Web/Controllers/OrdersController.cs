@@ -30,6 +30,16 @@ namespace shop.Web.Controllers
         //aqui es donde le voy a decir que me pinte la tabla de ordener
         public async Task<IActionResult> Index()
         {
+           
+                var model = await orderRepository.GetOrdersAsync(this.User.Identity.Name);
+                return View(model);
+        
+        }
+              
+
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> SubmitOrders()
+        {
             var model = await orderRepository.GetOrdersAsync(this.User.Identity.Name);
             return View(model);
         }
